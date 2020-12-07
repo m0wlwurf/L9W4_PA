@@ -1,0 +1,47 @@
+---
+title: "Less 9 W4 Assignment"
+author: "Felix m0wlwurf"
+date: "7 12 2020"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Idea of App
+
+- short App to showcase the *shiny* skills acquired in this course
+- this app will allow the user to set a Value for X using an interactive slider
+- for a given X, the probability p(X>x) will be calculated using standard normal distribution
+- The App will also visualize X and the distribution function
+
+## Deployment of APP
+
+- App is hosted on *shinyapps.io*
+- Link: https://m0wlwurf.shinyapps.io/Less9W4PA_V1/
+
+
+## Code of server-portion:
+
+```{r ui, echo=TRUE}
+server <- function(input, output) {
+
+    output$distPlot <- renderPlot({
+        # generate bins based on input$bins from ui.R
+        p <- seq(-5, 5, .1)
+        y <- dnorm(p)
+        # draw the histogram with the specified number of bins
+        plot(p, y, type = "l", xlab = "X", ylab = "Probability Density")
+        abline(v = input$x, col = "red")
+    })
+    output$CumulDist <- renderText(pnorm(input$x))
+}
+```
+
+## Thank you! :-)
+
+Seriously.. how you gonna fill 5 pages?
+
+
+
